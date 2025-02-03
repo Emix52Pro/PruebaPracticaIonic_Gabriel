@@ -1,0 +1,30 @@
+ion-card {
+  cursor: pointer;
+  text-align: center;
+  height: 200px;  /* Ajusta esta altura según tus necesidades */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+ion-card img {
+  width: 100%;
+  height: 70%;  /* La imagen ocupará el 70% de la carta */
+  object-fit: cover;
+}
+
+ion-card-title {
+  font-size: 1.2em;
+  height: 30%;  /* El título ocupará el 30% restante de la carta */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;  /* Elimina cualquier margen para centrar el texto verticalmente */
+}
+
+/* Estilos para las estrellas de calificación */
+.rating-star {
+  font-size: 1em; /* Ajusta el tamaño según lo necesites */
+  color: #f4b400; /* Color dorado */
+  margin: 0 1px;
+}

@@ -1,0 +1,64 @@
+/* Card del lugar */
+.lugar-card {
+  margin: 16px;
+  text-align: center;
+}
+
+.lugar-card img {
+  width: 100%;
+  max-height: 250px; /* Altura máxima adecuada */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Título de la sección */
+.section-title {
+  text-align: center;
+  margin: 16px 0;
+}
+
+/* Estilos para cada ítem de comentario */
+ion-item {
+  margin: 8px;
+  --min-height: 80px;
+  --inner-padding-end: 0;
+}
+
+/* Avatar: círculo con fondo y texto centrado */
+.avatar-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1em;
+  color: #fff;
+}
+
+/* Texto del comentario */
+.comment-text {
+  margin: 4px 0;
+}
+
+/* Calificación en estrellas del comentario */
+.comment-rating {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.comment-star {
+  font-size: 0.9em;
+  color: #f4b400;
+  margin-right: 2px;
+}
+
+/* Botones de edición/eliminación */
+ion-button[fill="clear"] {
+  --padding-start: 0;
+  --padding-end: 0;
+  font-size: 0.8em;
+}

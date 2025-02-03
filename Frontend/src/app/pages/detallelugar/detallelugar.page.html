@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ lugar?.titulo }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/lugares" text="Regresar" color="primary"></ion-back-button>
+    </ion-buttons>
+    <ion-button slot="end" (click)="mostrarFormularioComentario()">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+    </ion-button>
+    <!-- Botón para eliminar el lugar, solo visible para admin -->
+    <ion-button slot="end" *ngIf="isAdmin" (click)="confirmarEliminacion()">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loading *ngIf="isLoading"></app-loading>
+
+  <div *ngIf="!isLoading && lugar">
+    <!-- Card para el lugar con imagen y título en tamaño adecuado -->
+    <ion-card class="lugar-card">
+      <img [src]="lugar.imagen" alt="{{ lugar.titulo }}" />
+      <ion-card-header>
+        <ion-card-title>{{ lugar.titulo }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card-title class="section-title">Comentarios</ion-card-title>
+
+    <!-- Lista de comentarios -->
+    <ion-item *ngFor="let comentario of lugar?.comentarios">
+      <ion-avatar slot="start">
+        <div class="avatar-circle">
+          {{ comentario.name ? comentario.name.charAt(0).toUpperCase() : '?' }}
+        </div>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ comentario.name }}</h2>
+        <p class="comment-text">{{ comentario.comentario }}</p>
+        <div class="comment-rating">
+          <ng-container *ngFor="let starIcon of getStarIcons(comentario.puntuacion)">
+            <ion-icon [icon]="starIcon" class="comment-star"></ion-icon>
+          </ng-container>
+          <span>({{ comentario.puntuacion }})</span>
+        </div>
+        <!-- Botones de editar/eliminar se muestran solo si el usuario puede editar/eliminar -->
+        <ion-button *ngIf="canEditComment(comentario)" (click)="editarComentario(comentario)" fill="clear" size="small">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="canEditComment(comentario)" (click)="eliminarComentario(comentario)" fill="clear" size="small">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-label>
+    </ion-item>
+
+    <!-- Botón flotante para modificar el lugar, solo para admin -->
+    <ion-fab *ngIf="isAdmin" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button [routerLink]="['/modificarlugar', lugar.id]">
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-content>
