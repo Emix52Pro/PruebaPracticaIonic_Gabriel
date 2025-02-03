@@ -1,7 +1,7 @@
 export interface Comentario {
-    id?: number;         // Opcional, en caso de que venga del backend
-    name: string;
-    comentario: string;
-    puntuacion: number;  // Valor entre 1 y 5
-  }
-  
+  id: number;
+  comentario: string;
+  puntuacion: number;
+  userId: number;  // Nuevo campo
+  name?: string;   // Mantener opcional por compatibilidad
+}

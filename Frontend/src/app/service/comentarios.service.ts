@@ -34,8 +34,15 @@ export class ComentariosService {
    * Se envía un objeto que incluye el nombre del comentarista, el texto del comentario y la puntuación.
    * Ejemplo de endpoint: POST http://localhost:3000/api/lugares/1/comentarios
    */
-  addComentario(lugarId: number, comentario: { name: string; comentario: string; puntuacion: number }): Observable<Comentario> {
-    return this.http.post<Comentario>(`${this.apiUrl}/lugares/${lugarId}/comentarios`, comentario);
+  addComentario(lugarId: number, comentario: { 
+    comentario: string; 
+    puntuacion: number 
+  }): Observable<Comentario> {
+    // Dejar que el backend obtenga el usuario del token
+    return this.http.post<Comentario>(
+      `${this.apiUrl}/lugares/${lugarId}/comentarios`, 
+      comentario // Eliminar el name del payload
+    );
   }
 
   /**

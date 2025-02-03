@@ -62,3 +62,20 @@ ion-button[fill="clear"] {
   --padding-end: 0;
   font-size: 0.8em;
 }
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.star-icon {
+  font-size: 24px;
+  color: var(--ion-color-warning);
+  cursor: pointer;
+}
+
+.rating-alert {
+  --min-width: 300px;
+}

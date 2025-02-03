@@ -22,7 +22,7 @@ import {
 } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Lugar } from 'src/app/models/Lugar';
+import { Comentario, Lugar } from 'src/app/models/Lugar';
 import { LugaresService } from 'src/app/service/lugares.service';
 import { ComentariosService } from 'src/app/service/comentarios.service';
 import { addIcons } from 'ionicons';
@@ -285,13 +285,14 @@ export class DetallelugarPage implements OnInit, OnDestroy {
     await alert.present();
   }
 
-
-  canEditComment(comentario: any): boolean {
-    if (this.isAdmin) return true; // Permitir si es admin
-    if (!comentario.name || !this.currentUser) return false; // No permitir si no hay nombre o usuario actual
-    return comentario.name.toLowerCase() === this.currentUser.toLowerCase(); // Permitir si el nombre coincide
+  canEditComment(comentario: Comentario): boolean {
+    // Admin siempre puede editar
+    if (this.isAdmin) return true;
+    
+    // Usuario normal solo si es dueño del comentario
+    const currentUser = this.authService.getCurrentUser();
+    return currentUser?.id === comentario.userId;
   }
-
   async confirmarEliminacion() {
     const alert = await this.alertController.create({
       header: 'Confirmar Eliminación',

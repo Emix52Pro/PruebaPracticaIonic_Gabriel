@@ -31,12 +31,13 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  getCurrentUser(): { username: string; role: string } | null {
+  getCurrentUser(): { id: number; username: string; role: string } | null {
     const token = localStorage.getItem('token');
     if (!token) return null;
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       return {
+        id: payload.userId, // Asegurar que el backend incluye userId en el JWT
         username: payload.username,
         role: payload.role
       };
